@@ -1,0 +1,35 @@
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'titulo'
+      'caixa'
+      'cart';
+    padding: 10px;
+  }
+
+  .titulo {
+    margin-bottom: 10px;
+  }
+
+  .caixa {
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
+
+  .cart {
+    margin-top: 20px;
+    width: 100%;
+    justify-self: center;
+  }
+
+  .caixa0 button {
+    bottom: 0px;
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .caixa0 img {
+    height: 150px; 
+  }
+}

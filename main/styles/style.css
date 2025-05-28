@@ -1,0 +1,125 @@
+@charset "UTF-8";
+
+:root {
+
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) 250px;
+    grid-template-areas: 
+    'titulo titulo titulo cart'
+    'caixa caixa caixa cart';
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    gap: 20px;
+    /* border: 2px solid blue; */
+}
+
+.titulo {
+    grid-area: titulo;
+    font-size: 2rem;
+    padding: 5px 0;
+    margin-left: 15px;
+    /* border: 2px solid red; */
+}
+
+.img2 {
+    display: block;
+    margin: 0 auto 10px;
+}
+
+.caixa {
+    grid-area: caixa;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 10px;
+    /* border: 2px solid green; */
+} 
+
+.caixa0 {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.2s ease;
+}
+
+.caixa0:hover {
+    transform: scale(1.02);
+    transform-origin: center center;
+}
+
+.caixa0 img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px 12px 0 0;
+}
+
+.caixa0 button {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.caixa0 button:hover {
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+.caixa1 p {
+    padding: 4px 10px;
+    margin: 0;
+    font-size: 16px;
+}
+
+.nome {
+    color: #555;    
+}
+
+.desc {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.valor {
+    color: #2e8b57;
+    font-weight: bold;
+}
+
+.cart {
+    grid-area: cart;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+    /* border: 2px solid yellow; */
+}
