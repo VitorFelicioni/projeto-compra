@@ -1,4 +1,29 @@
-@media (max-width: 768px) {
+/* tablet */
+
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      'titulo titulo'
+      'caixa caixa'
+      'cart cart';
+    padding: 10px;
+  }
+
+  .caixa {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cart {
+    margin-top: 20px;
+    width: 100%;
+    justify-self: center;
+  }
+}
+
+/* celular */
+
+@media (max-width: 768px) {    
   .container {
     grid-template-columns: 1fr;
     grid-template-areas:
