@@ -54,12 +54,8 @@ body {
 } 
 
 .caixa0 {
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    transition: transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .caixa0:hover {
@@ -68,35 +64,73 @@ body {
 }
 
 .caixa0 img {
-    width: 100%;
-    height: 170px;
-    object-fit: cover;
-    display: block;
-    border-radius: 12px 12px 0 0;
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px 12px 0 0;
 }
 
-.caixa0 button {
-    position: absolute;
-    bottom: 0px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
+.button-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 55%;
+  transform: translateX(-50%);
+  width: 50%;
+  margin-bottom: 4px;
+  z-index: 2;
+}
+
+.caixa0 button,
+.quantity-controls {
+  width: 80%;
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px;
+  border-radius: 18px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
 }
 
 .caixa0 button:hover {
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: white;
+    color: orangered;
+}
+
+.quantity-controls {
+    background-color: orangered;
+    padding: 7px;  
+}
+
+.quantity-controls button {
+  background-color: orangered;
+  color: white;
+  font-size: 14px;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+.quantity-controls span {
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  flex-grow: 1;
 }
 
 .caixa1 p {
     padding: 4px 10px;
     margin: 0;
+    margin-top: 3px;
     font-size: 16px;
 }
 
