@@ -82,7 +82,7 @@ body {
 }
 
 .caixa0 button,
-.quantity-controls {
+.quantidade-controls {
   width: 80%;
   background-color: white;
   color: black;
@@ -101,12 +101,12 @@ body {
     color: orangered;
 }
 
-.quantity-controls {
+.quantidade-controls {
     background-color: orangered;
     padding: 7px;  
 }
 
-.quantity-controls button {
+.quantidade-controls button {
   background-color: orangered;
   color: white;
   font-size: 14px;
@@ -120,7 +120,7 @@ body {
   cursor: pointer;
 }
 
-.quantity-controls span {
+.quantidade-controls span {
   font-size: 14px;
   color: white;
   text-align: center;
