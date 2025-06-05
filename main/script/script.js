@@ -33,9 +33,20 @@ document.querySelectorAll('.caixa0').forEach(produto => { //  executa na hora qu
     
     let count = 1;
 
+    // coleta dados do produto
+    const nome = produto.parentElement.querySelector('.nome').textContent;
+    const precoStr = produto.parentElement.querySelector('.valor').textContent;
+    const preco = parseFloat(precoStr.replace('$', ''));
+
+    // adiciona ao carrinho
+    carrinho[nome] = { qtd: count, preco };
+    atualizarCarrinho();
+
     plus.addEventListener('click', () => {
       count++;
       quantity.textContent = count;
+      carrinho[nome].qtd= count;
+      atualizarCarrinho();
     });
 
     minus.addEventListener('click', () => {
@@ -43,9 +54,42 @@ document.querySelectorAll('.caixa0').forEach(produto => { //  executa na hora qu
       if (count <= 0) {
         controls.remove();
         addButton.style.display = 'block';  // se a contagem chegar em 0 volta o botao Add cart
+        delete carrinho[nome];  // remove carrinho
       } else {
         quantity.textContent = count;
+        carrinho[nome].qtd = count;
       }
+      atualizarCarrinho();
     });
   });
 });
+
+const carrinho = {};
+
+function atualizarCarrinho() {
+  const cartContent = document.getElementById('cart-content');
+  cartContent.innerHTML = ''; // limpa tudo
+  let totalItens = 0;
+
+  for (const nome in carrinho) {
+    const item = carrinho[nome];
+    totalItens += item.qtd;
+
+    const div = document.createElement('div');
+    div.innerHTML = `
+      <p class="cart-item-nome">${nome}</p>
+      <p class="cart-item-info">
+        <span class="cart-item-qtd">${item.qtd}x</span> — $${(item.qtd * item.preco).toFixed(2)}</p>`;
+    cartContent.appendChild(div);
+  }
+
+  if (totalItens === 0) {
+    cartContent.innerHTML = `
+      <img src="/assets/images/illustration-empty-cart.svg" alt="cart" class="img2">
+      <p>Your added items will appear here</p>
+    `;
+  }
+
+  document.getElementById('total-itens').textContent = totalItens;
+}
+

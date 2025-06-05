@@ -1,21 +1,32 @@
 @charset "UTF-8";
 
+@import url(https://fonts.google.com/specimen/Red+Hat+Text);
+
 :root {
+    --red: hsl(14, 86%, 42%);
+    --green: hsl(159, 69%, 38%);
 
+    --rose-50: hsl(20, 50%, 98%);
+    --rose-100: hsl(13, 31%, 94%);
+    --rose-300: hsl(14, 25%, 72%);
+    --rose-400: hsl(7, 20%, 60%);
+    --rose-500: hsl(12, 20%, 44%);
+    --rose-900: hsl(14, 65%, 9%);
 }
-
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Red Hat Text';
+    font-size: 16px;
 }
 
 body {
     overflow-x: hidden;
     display: flex;
     justify-content: center;
-    padding: 20px;
+    padding: 15px;
 }
 
 .container {
@@ -27,7 +38,7 @@ body {
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    gap: 20px;
+    gap: 18px;
     /* border: 2px solid blue; */
 }
 
@@ -84,8 +95,8 @@ body {
 .caixa0 button,
 .quantidade-controls {
   width: 80%;
-  background-color: white;
-  color: black;
+  background-color: var(--rose-50);
+  color: var(--rose-900);
   border: none;
   padding: 10px;
   border-radius: 18px;
@@ -97,18 +108,18 @@ body {
 }
 
 .caixa0 button:hover {
-    background-color: white;
-    color: orangered;
+    background-color: var(--rose-50);
+    color: var(--red);
 }
 
 .quantidade-controls {
-    background-color: orangered;
+    background-color: var(--red);
     padding: 7px;  
 }
 
 .quantidade-controls button {
-  background-color: orangered;
-  color: white;
+  background-color: var(--red);
+  color: var(--rose-50);
   font-size: 14px;
   border-radius: 50%;
   width: 24px;
@@ -116,13 +127,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid white;
+  border: 1px solid var(--rose-50);
   cursor: pointer;
 }
 
 .quantidade-controls span {
   font-size: 14px;
-  color: white;
+  color: var(--rose-50);
   text-align: center;
   flex-grow: 1;
 }
@@ -135,25 +146,80 @@ body {
 }
 
 .nome {
-    color: #555;    
+    color: var(--rose-400);    
 }
 
 .desc {
-    font-weight: bold;
+    font-weight: 600;
     font-size: 16px;
 }
 
 .valor {
-    color: #2e8b57;
+    color: var(--red);
     font-weight: bold;
 }
 
 .cart {
     grid-area: cart;
     padding: 20px;
-    background-color: #fff;
+    background-color: var(--rose-50);
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     height: fit-content;
-    /* border: 2px solid yellow; */
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cart h2 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    color: orangered;
+}
+
+#cart-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#cart-content div {
+    border-bottom: 1px solid var(--rose-300);
+    padding-bottom: 10px;
+}
+
+.cart-item-nome {
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--rose-900);
+    margin-bottom: 4px;
+}
+
+.cart-item-info {
+    font-size: 8px;
+    color: var(--rose-500);
+    padding-top: 5px;
+}
+
+.cart-item-qtd {
+    color: var(--red);
+    font-weight: bold;
+}
+
+#cart-content p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+#cart-content strong {
+    color: var(--rose-900);
+}
+
+.img2 {
+    display: block;
+    margin: 10px auto;
+    max-width: 120px;
+    opacity: 0.6;
 }
