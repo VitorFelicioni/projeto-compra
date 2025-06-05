@@ -76,20 +76,140 @@ function atualizarCarrinho() {
     totalItens += item.qtd;
 
     const div = document.createElement('div');
-    div.innerHTML = `
-      <p class="cart-item-nome">${nome}</p>
-      <p class="cart-item-info">
-        <span class="cart-item-qtd">${item.qtd}x</span> — $${(item.qtd * item.preco).toFixed(2)}</p>`;
+    div.classList.add('cart-item');
+
+    const nomeEl = document.createElement('p');
+    nomeEl.className = 'cart-item-nome';
+    nomeEl.textContent = nome;
+
+    const infoEl = document.createElement('div');
+    infoEl.className = 'cart-item-info';
+
+    const texto = document.createElement('span');
+    texto.innerHTML = `<span class="cart-item-qtd">${item.qtd}x</span> — $${(item.qtd * item.preco).toFixed(2)}`;
+
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = '×';
+    removeBtn.className = 'remove-btn';
+    removeBtn.addEventListener('click', () => {
+      delete carrinho[nome];
+
+      // restaura visual do produto
+      document.querySelectorAll('.caixa1').forEach(prod => {
+        const nomeEl = prod.querySelector('.nome');
+        if (nomeEl && nomeEl.textContent === nome) {
+          const controls = prod.querySelector('.quantidade-controls');
+          const addBtn = prod.querySelector('button');
+
+          if (controls) controls.remove();
+          if (addBtn) addBtn.style.display = 'block';
+        }
+      });
+
+      atualizarCarrinho();
+    });
+
+    infoEl.appendChild(texto);
+    infoEl.appendChild(removeBtn);
+
+    div.appendChild(nomeEl);
+    div.appendChild(infoEl);
     cartContent.appendChild(div);
   }
 
-  if (totalItens === 0) {
-    cartContent.innerHTML = `
-      <img src="/assets/images/illustration-empty-cart.svg" alt="cart" class="img2">
-      <p>Your added items will appear here</p>
-    `;
+  if (totalItens > 0) {
+    const formatador = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+
+    const valorTotal = Object.values(carrinho).reduce((soma, item) => {
+      return soma + item.qtd * item.preco;
+    }, 0);
+
+    const totalDiv = document.createElement('div');
+    totalDiv.className = 'cart-total';
+    totalDiv.innerHTML = `<strong>Total: ${formatador.format(valorTotal)}</strong>`;
+    cartContent.appendChild(totalDiv);
+
+    const confirmButton = document.createElement('button');
+    confirmButton.textContent = 'Confirm Order';
+    confirmButton.className = 'confirmar-btn';
+    confirmButton.addEventListener('click', mostrarModal);
+    cartContent.appendChild(confirmButton);
+  } else {
+    // se carrinho estiver vazio, mostrar mensagem e imagem
+    const img = document.createElement('img');
+    img.src = '/assets/images/illustration-empty-cart.svg';
+    img.alt = 'cart';
+    img.className = 'img2';
+
+    const p = document.createElement('p');
+    p.textContent = 'Your added items will appear here';
+
+    cartContent.appendChild(img);
+    cartContent.appendChild(p);
   }
 
-  document.getElementById('total-itens').textContent = totalItens;
+function mostrarModal() {
+  const modal = document.getElementById('order-modal');
+  const detalhes = document.getElementById('order-details');
+  detalhes.innerHTML = '';
+
+  let totalPedido = 0;
+
+  for (const nome in carrinho) {
+    const item = carrinho[nome];
+
+    const div = document.createElement('div');
+    div.className = 'order-item';
+
+    const img = document.createElement('img');
+    const produto = Array.from(document.querySelectorAll('.caixa1')).find(p => 
+      p.querySelector('.nome')?.textContent === nome
+    );
+    if (produto) {
+      img.src = produto.querySelector('img').src;
+    }
+
+    const info = document.createElement('div');
+    info.className = 'order-item-info';
+
+    const quantidadeEl = document.createElement('span');
+    quantidadeEl.className = 'order-item-qtd';
+    quantidadeEl.textContent = `${item.qtd}x`;
+
+    const nomeEl = document.createElement('span');
+    nomeEl.className = 'order-item-nome';
+    nomeEl.textContent = nome;
+
+    const precoEl = document.createElement('span');
+    precoEl.className = 'order-item-preco';
+    precoEl.textContent = `$${(item.qtd * item.preco).toFixed(2)}`;
+
+    info.appendChild(quantidadeEl);
+    info.appendChild(nomeEl);
+    info.appendChild(precoEl);
+
+    div.appendChild(img);
+    div.appendChild(info);
+    detalhes.appendChild(div);
+
+    totalPedido += item.qtd * item.preco;
+  }
+
+  // total final
+  const totalEl = document.createElement('div');
+  totalEl.className = 'order-total';
+  totalEl.innerHTML = `<strong>Total: $${totalPedido.toFixed(2)}</strong>`;
+  detalhes.appendChild(totalEl);
+
+  modal.classList.remove('hidden');
 }
 
+
+// fecha modal ao clicar no X
+document.querySelector('.close-modal').addEventListener('click', () => {
+  document.getElementById('order-modal').classList.add('hidden');
+})
+};
