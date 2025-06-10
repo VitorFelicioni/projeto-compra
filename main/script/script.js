@@ -135,7 +135,7 @@ function atualizarCarrinho() {
     const confirmButton = document.createElement('button');
     confirmButton.textContent = 'Confirm Order';
     confirmButton.className = 'confirmar-btn';
-    confirmButton.addEventListener('click', mostrarModal);
+    confirmButton.addEventListener('click', mostrarJanela);
     cartContent.appendChild(confirmButton);
   } else {
     // se carrinho estiver vazio, mostrar mensagem e imagem
@@ -151,8 +151,8 @@ function atualizarCarrinho() {
     cartContent.appendChild(p);
   }
 
-function mostrarModal() {
-  const modal = document.getElementById('order-modal');
+function mostrarJanela() {
+  const janela = document.getElementById('order-janela');
   const detalhes = document.getElementById('order-details');
   detalhes.innerHTML = '';
 
@@ -204,12 +204,12 @@ function mostrarModal() {
   totalEl.innerHTML = `<strong>Total: $${totalPedido.toFixed(2)}</strong>`;
   detalhes.appendChild(totalEl);
 
-  modal.classList.remove('hidden');
+  janela.classList.remove('hidden');
 }
 
 
-// fecha modal ao clicar no X
-document.querySelector('.close-modal').addEventListener('click', () => {
-  document.getElementById('order-modal').classList.add('hidden');
+// fecha janela extra ao clicar no X
+document.querySelector('.close-janela').addEventListener('click', () => {
+  document.getElementById('order-janela').classList.add('hidden');
 })
 };
