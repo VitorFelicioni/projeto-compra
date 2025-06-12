@@ -1,7 +1,9 @@
+
+// seleciona cada container de produto (caixa0)
 document.querySelectorAll('.caixa0').forEach(produto => { //  executa na hora que abre a tela
 
-  // produto representa cada caixa da tela
   debugger;
+  // produto representa cada caixa da tela
   const addButton = produto.querySelector('button'); // botão de cada um dos produtos
 
   const buttonWrapper = document.createElement('div');
@@ -16,18 +18,16 @@ document.querySelectorAll('.caixa0').forEach(produto => { //  executa na hora qu
 
     const controls = document.createElement('div');
     controls.className = 'quantidade-controls';
-
+    
     const minus = document.createElement('button');
     minus.textContent = '−';
-
     const quantity = document.createElement('span');
     quantity.textContent = '1';
-
     const plus = document.createElement('button');
     plus.textContent = '+';
 
     controls.appendChild(minus);    
-    controls.appendChild(quantity);    // adciona os botoes - # + na div controls
+    controls.appendChild(quantity);    // adiciona os botoes - # + na div controls
     controls.appendChild(plus);
     buttonWrapper.appendChild(controls);   // adiciona controls em buttonwrapper
     
@@ -45,7 +45,7 @@ document.querySelectorAll('.caixa0').forEach(produto => { //  executa na hora qu
     plus.addEventListener('click', () => {
       count++;
       quantity.textContent = count;
-      carrinho[nome].qtd= count;
+      carrinho[nome].qtd = count;
       atualizarCarrinho();
     });
 
@@ -64,7 +64,7 @@ document.querySelectorAll('.caixa0').forEach(produto => { //  executa na hora qu
   });
 });
 
-const carrinho = {};
+const carrinho = {};  // armazena os itens: { nome: { qtd, preco } }
 
 function atualizarCarrinho() {
   const cartContent = document.getElementById('cart-content');
@@ -75,26 +75,24 @@ function atualizarCarrinho() {
     const item = carrinho[nome];
     totalItens += item.qtd;
 
+    // cria elementos para cada item no carrinho
     const div = document.createElement('div');
     div.classList.add('cart-item');
-
     const nomeEl = document.createElement('p');
     nomeEl.className = 'cart-item-nome';
     nomeEl.textContent = nome;
-
     const infoEl = document.createElement('div');
     infoEl.className = 'cart-item-info';
-
     const texto = document.createElement('span');
     texto.innerHTML = `<span class="cart-item-qtd">${item.qtd}x</span> — $${(item.qtd * item.preco).toFixed(2)}`;
-
     const removeBtn = document.createElement('button');
     removeBtn.textContent = '×';
     removeBtn.className = 'remove-btn';
+
     removeBtn.addEventListener('click', () => {
       delete carrinho[nome];
 
-      // restaura visual do produto
+      // restaura botao do produto
       document.querySelectorAll('.caixa1').forEach(prod => {
         const nomeEl = prod.querySelector('.nome');
         if (nomeEl && nomeEl.textContent === nome) {
@@ -118,14 +116,14 @@ function atualizarCarrinho() {
   }
 
   if (totalItens > 0) {
+    // converte a moeda e exibe botao de confirmar
     const formatador = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
     });
 
     const valorTotal = Object.values(carrinho).reduce((soma, item) => {
-      return soma + item.qtd * item.preco;
-    }, 0);
+      return soma + item.qtd * item.preco; }, 0);
 
     const totalDiv = document.createElement('div');
     totalDiv.className = 'cart-total';
@@ -137,8 +135,9 @@ function atualizarCarrinho() {
     confirmButton.className = 'confirmar-btn';
     confirmButton.addEventListener('click', mostrarJanela);
     cartContent.appendChild(confirmButton);
+
   } else {
-    // se carrinho estiver vazio, mostrar mensagem e imagem
+    // se o carrinho estiver vazio, mostra mensagem e imagem
     const img = document.createElement('img');
     img.src = '/assets/images/illustration-empty-cart.svg';
     img.alt = 'cart';
@@ -152,41 +151,42 @@ function atualizarCarrinho() {
   }
 
 function mostrarJanela() {
-  const janela = document.getElementById('order-janela');
-  const detalhes = document.getElementById('order-details');
-  detalhes.innerHTML = '';
+  const janela = document.getElementById('order-janela');  // janela de confirmaçao escondida
+  const detalhes = document.getElementById('order-details');  // onde vai inserir os itens
+  detalhes.innerHTML = '';  // limpa antes de mostrar os novos
 
-  let totalPedido = 0;
+  let totalPedido = 0;  // acumula valores do preço total do pedido
 
   for (const nome in carrinho) {
     const item = carrinho[nome];
 
     const div = document.createElement('div');
-    div.className = 'order-item';
-
+    div.className = 'order-item';              // cria as imagens dos itens no carrinho
     const img = document.createElement('img');
+
     const produto = Array.from(document.querySelectorAll('.caixa1')).find(p => 
-      p.querySelector('.nome')?.textContent === nome
-    );
+      p.querySelector('.nome')?.textContent === nome      //  procura produto com msm nome do item no carrinho
+    ); 
     if (produto) {
       img.src = produto.querySelector('img').src;
     }
 
     const info = document.createElement('div');
     info.className = 'order-item-info';
-
+    
     const quantidadeEl = document.createElement('span');
-    quantidadeEl.className = 'order-item-qtd';
+    quantidadeEl.className = 'order-item-qtd';       // mostra numero de unidades compradas
     quantidadeEl.textContent = `${item.qtd}x`;
 
     const nomeEl = document.createElement('span');
-    nomeEl.className = 'order-item-nome';
+    nomeEl.className = 'order-item-nome';            // nome do item
     nomeEl.textContent = nome;
 
     const precoEl = document.createElement('span');
-    precoEl.className = 'order-item-preco';
+    precoEl.className = 'order-item-preco';          //  valor total
     precoEl.textContent = `$${(item.qtd * item.preco).toFixed(2)}`;
 
+    //  coloca info e img do item da div do #order-details
     info.appendChild(quantidadeEl);
     info.appendChild(nomeEl);
     info.appendChild(precoEl);
@@ -199,12 +199,12 @@ function mostrarJanela() {
   }
 
   // total final
-  const totalEl = document.createElement('div');
+  const totalEl = document.createElement('div');  // div q vai mostrar total da compra
   totalEl.className = 'order-total';
-  totalEl.innerHTML = `<strong>Total: $${totalPedido.toFixed(2)}</strong>`;
+  totalEl.innerHTML = `<strong>Total: $${totalPedido.toFixed(2)}</strong>`;  // tofixed2 para mostrar 2 casas decimais
   detalhes.appendChild(totalEl);
 
-  janela.classList.remove('hidden');
+  janela.classList.remove('hidden');  // remmove o hidden para poder mostrar a janela de finalizaçao
 }
 
 

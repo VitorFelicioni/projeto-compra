@@ -82,7 +82,8 @@ body {
   border-radius: 12px 12px 0 0;
 }
 
-.button-wrapper {
+
+.button-wrapper {    /* posiciona botao + e - ~*/
   position: absolute;
   bottom: 0;
   left: 55%;
@@ -93,7 +94,7 @@ body {
 }
 
 .caixa0 button,
-.quantidade-controls {
+.quantidade-controls {  
   width: 80%;
   background-color: var(--rose-50);
   color: var(--rose-900);
@@ -112,7 +113,7 @@ body {
     color: var(--red);
 }
 
-.quantidade-controls {
+.quantidade-controls {   
     background-color: var(--red);
     padding: 7px;  
 }
@@ -131,7 +132,7 @@ body {
   cursor: pointer;
 }
 
-.quantidade-controls span {
+.quantidade-controls span {   /* ~posiciona botao + e - */
   font-size: 14px;
   color: var(--rose-50);
   text-align: center;
@@ -159,7 +160,7 @@ body {
     font-weight: bold;
 }
 
-.cart {
+.cart {    /* carrinho e botoes dentro dele~ */
     grid-area: cart;
     padding: 20px;
     background-color: var(--rose-50);
@@ -260,7 +261,7 @@ body {
   color: var(--green);
 }
 
-.confirmar-btn {
+.confirmar-btn {   /* ~carrinho e botoes dentro dele */
   width: 100%;
   margin-top: 10px;
   padding: 10px;
@@ -285,7 +286,7 @@ body {
   color: var(--rose-900);
 }
 
-.janela {
+.janela {    /* janela de finalizaçao~ */
   position: fixed;
   top: 0;
   left: 0;
@@ -298,7 +299,7 @@ body {
   z-index: 999;
 }
 
-.janela.hidden {
+.janela.hidden {   /* deixa a janela escondida */
   display: none;
 }
 

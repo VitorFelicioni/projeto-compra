@@ -11,11 +11,11 @@
     <title>App de compra</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container">   <!-- caixa principal com todo conteudo -->
         <h1 class="titulo">Desserts</h1>
 
         <div class="caixa">
-            <div class="caixa1">
+            <div class="caixa1">  <!-- caixa dos produtos -->
                 <div class="caixa0">
                     <img src="/assets/images/image-waffle-desktop.jpg" alt="waffle"> 
                     <button>Add to Cart</button>
@@ -106,7 +106,7 @@
             </div>
         </div>
 
-        <div class="cart">
+        <div class="cart">  <!-- carrinho -->
             <h2>Your Cart (<span id="total-itens">0</span>)</h2>
             <div id="cart-content">
                 <img src="/assets/images/illustration-empty-cart.svg" alt="cart" class="img2">
@@ -114,14 +114,15 @@
             </div>
         </div>
     </div>
-<div id="order-janela" class="janela hidden">
-  <div class="janela-content">
-    <span class="close-janela">&times;</span>
-    <h3 class="order-title">Order Confirmed</h3>
-    <div id="order-details"></div>
-    <p class="brigado">Thank you for your order!</p>
-  </div>
-</div>
+
+    <div id="order-janela" class="janela hidden">  <!-- janela de finalizaçao da compra -->
+        <div class="janela-content">
+            <span class="close-janela">&times;</span>
+            <h3 class="order-title">Order Confirmed</h3>
+            <div id="order-details"></div>
+            <p class="brigado">Thank you for your order!</p>
+        </div>
+    </div>
     <script src="/main/script/script.js"></script>
 </body>
 </html>
